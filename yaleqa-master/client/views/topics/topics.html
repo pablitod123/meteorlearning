@@ -1,0 +1,56 @@
+
+<template name="topicList">
+  <h3>Topics with questions</h3>
+  <ul class="topic-list">
+  {{#each topics}}
+    {{> topicDetail}}
+  {{/each}}
+  </ul>
+
+  <div class="well well-sm">
+  <label class="show-all-topics">
+    <input type="checkbox" checked="{{showResolved}}" />
+      Show topics that are not open
+  </label>
+</div>
+</template>
+
+<template name="topicDetail">
+  <li>
+    <span class="topic-title">
+    {{#if wasOpened}}
+      <a href="{{pathFor route='topicQuestions'}}">
+        {{title}}
+      </a>
+    {{else}}
+      {{title}}    
+    {{/if}} 
+    </span>
+    {{#if isUnopened}}<emph>Not yet open</emph> {{/if}}
+    {{#if isOpen}}Open{{/if}}
+    {{#if isClosed}}<emph>Closed</emph>{{/if}}
+    for questions.<br>
+
+    {{#if ../showAdmin}}
+      {{#if isInRole 'admin'}}
+        {{>topicStateForm }}
+      {{/if}}
+    {{/if}}
+
+  </li>
+</template>
+
+<template name="topicForm">
+  <form class="new-topic">
+    <input type="text" name="text" placeholder="Type to add new topic" />
+  </form>
+</template>
+
+<template name="topicStateForm">
+  Mark as: 
+  <form class="topic-state">
+    <input checked="{{stateIs 'unopened'}}" value="unopened" name="{{_id}}-state" type="radio" />unopened
+    <input checked="{{stateIs 'open'}}" value="open" name="{{_id}}-state" type="radio" />open
+    <input checked="{{stateIs 'closed'}}" value="closed" name="{{_id}}-state" type="radio" />closed
+  </form>
+</template>

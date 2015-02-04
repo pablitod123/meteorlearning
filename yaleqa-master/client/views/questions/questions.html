@@ -1,0 +1,27 @@
+<template name="questionWithComments">
+  <div class="row">
+    <div class="col-md-12">
+      <ol class="breadcrumb">
+        <li><a href="{{pathFor route='index'}}">Home</a></li>
+        <li class="active"><a href="{{pathFor route='topicQuestions' _id=topic._id }}">{{topic.title}}</a></li>
+      </ol>
+    </div>
+
+
+    <div class="col-md-12">
+      <ul class="media-list">
+        {{> questionWithVoting question}}
+      </ul>
+    </div>
+    <div class="col-md-12 comments">
+      <hr>
+      {{> commentList }}
+    </div>
+    <div class="col-md-12 comments">
+      <hr>
+      {{> newCommentForm}}
+
+
+    </div>
+  </div>
+</template>

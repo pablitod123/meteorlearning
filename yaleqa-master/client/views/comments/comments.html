@@ -1,0 +1,43 @@
+<template name="commentList">
+  {{#each ../comments}}
+    {{> comment}}
+  {{/each}}
+</template>
+<template name="commentText">
+    <i class="fa {{#if isAdmin}}fa-comment{{else}}fa-comment-o{{/if}}"></i>
+    {{#if isAdmin}}<b>Instructor:</b>{{/if}}
+    {{text}}.
+</template>
+
+
+<template name="comment">
+  <div class="comment">
+    <p>
+    {{> commentText}}
+    <br>
+      <span class="comment-posted-date">Posted {{createdAt}}</span>
+      {{#if isInRole 'admin'}}
+        Actions:
+        <a class="pin">
+          {{#if isPinned}}
+            unpin
+          {{else}}
+            pin
+          {{/if}}
+        </a> |
+        <a class="pin">
+          delete
+        </a>
+      {{/if}}
+    </p>
+  </div>
+</template>
+<template name="newCommentForm">
+  <form class="new-comment">
+    <div class="form-group">
+      <label for="text">Post a new comment</label>
+      <textarea class="form-control" rows="3" name="text" placeholder="Type to add new comment"></textarea>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+</template>

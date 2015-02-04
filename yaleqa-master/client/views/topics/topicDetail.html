@@ -1,0 +1,72 @@
+<template name="topicQuestions">
+  <div class="row">
+    <div class="col-md-12">
+      <ol class="breadcrumb">
+        <li><a href="{{pathFor route='index'}}">Home</a></li>
+        <li class="active">{{title}}</li>
+      </ol>
+      <h2>Questions for {{title}}</h2>
+
+      <div class="well well-sm">
+        <label class="hide-resolved">
+          <input type="checkbox" checked="{{showResolved}}" />
+          Show resolved questions
+        </label>
+        <a href="{{pathFor route='newQuestion'}}">
+          <button type="button" class="btn btn-primary">New Question</button>
+        </a>
+      </div>
+
+      <ul class="media-list">
+        {{#each questions}}
+          {{> questionWithVoting}}
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+
+</template>
+
+<template name="questionWithVoting">
+  <li class="media">
+    <div class="media-left question-votes">
+      <span class="num-votes">
+        {{votes}}
+      </span>
+      <a class="upvote">
+        <i class="fa {{#if upvoted}}fa-thumbs-up{{else}}fa-thumbs-o-up{{/if}}">
+        </i>
+      </a>
+      <a class="downvote">
+        <i class="fa {{#if downvoted}}fa-thumbs-down{{else}}fa-thumbs-o-down{{/if}}">
+        </i>
+      </a>
+    </div>
+    <div class="media-body">
+      <h4>{{text}}</h4>
+      <div class="pinned-comment-summary">
+        {{#each pinnedComments}}
+          {{> pinnedComment }}
+        {{/each}}
+      </div>
+      <div>
+        <a href="{{pathFor route='questionWithComments' topicId=../_id questionId=_id}}">
+          View comments
+        </a>
+        {{#if isInRole 'admin'}}
+          | <a class="resolve" href="">Mark {{#if isResolved}}un{{/if}}resolved</a>
+        {{/if}}
+        {{#if userCanDelete}}
+          | <a class="delete" href="">Delete</a>
+        {{/if}}
+      </div>
+    </div>
+
+  </li>
+</template>
+
+<template name="pinnedComment">
+  <p class="pinned-comment">
+    {{> commentText}}
+  </p>
+</template>

@@ -1,0 +1,40 @@
+<template name="index">
+
+    <div class="row">
+      <div class="col-md-12">
+        <h1>{{{siteName}}}</h1>
+          <p>
+            This is a question and answer board for classes at Yale.
+            It is realtime, mobile-first, and uses Yale CAS for 
+            authentication. Below is a list of topics under which
+            you can post questions and vote on others' questions.
+            All questions are anonymous.
+          </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        {{#if currentUser}}
+          {{> topicList}}
+        {{else}}
+          {{> loginButton}}
+        {{/if}}
+      </div>
+    </div>
+
+</template>
+
+<template name="questionList">
+  {{#each questions}}
+    {{> questionDetail}}
+  {{/each}}
+</template>
+
+<template name="questionDetail">
+  <div>{{text}}</div>
+</template>
+
+<template name="loginButton">
+  <button>Login</button>
+</template>

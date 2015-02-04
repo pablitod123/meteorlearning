@@ -1,0 +1,15 @@
+{
+	"cas": {
+	    "baseUrl": "https://secure.its.yale.edu/cas/",
+	    "autoClose": true
+	},
+	"public": {
+            "pathPrefix": "/qa",
+	    "cas": {
+	        "loginUrl": "https://secure.its.yale.edu/cas/login",
+	        "serviceParam": "service",
+	        "popupWidth": 810,
+	        "popupHeight": 610
+	    }
+	}
+}

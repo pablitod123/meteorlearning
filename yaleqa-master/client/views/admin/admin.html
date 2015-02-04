@@ -1,0 +1,14 @@
+<template name="admin">
+  <div class="col-md-12">
+    <h1>Admin page for Yale Q&A</h1>
+
+    {{#if currentUser}}
+      {{> topicForm}}
+      {{> topicList showAdmin=true}}
+    {{else}}
+      {{> loginButton}}
+    {{/if}}
+  </div>
+
+</template>
+
